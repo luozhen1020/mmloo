@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>购物车页面</title>
+	<style>
+		#cartList div{padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid #ddd;}
+		#cartList img{display:block;width:100px;}
+		.subPrice{padding:5px 20px;color:#f00;font-weight:bold;text-align:right;}
+	</style>
+    <script src="cookie.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+        	console.log(document.cookie)
+            document.getElementById('showCart').onclick = function () {
+                console.log(getCookie());
+            }
+
+            document.getElementById('clearCart').onclick = function () {
+                removeCookie();
+            }
+        }
+    </script>	
+</head>
+<body>
+	<div id="cartList"></div>
+	<div class="subPrice"></div>
+	<button id="showCart">显示购物车商品</button>
+    <button id="clearCart">清空购物车</button>
+</body>
+</html>

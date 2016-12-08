@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css" />
+		<script type="text/javascript" src="../lib/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../js/index.js"></script>
+		<script type="text/javascript" src="../js/detail.js"></script>
+		<script type="text/javascript" src="../js/base.js" ></script><!--cookie-->
+		
+	
+		<script type="text/javascript" src="../lib/jquery-1.11.3.js" ></script>
+		<script type="text/javascript" src="../lib/jquery.jqzoom.min.js" ></script>
+		<style type="text/css">
+			#nav .menu{display: none;}
+			#sort{width: 1200px;overflow: hidden;margin: 20px auto;} 
+			#sort .sort-top{height: 50px;line-height: 50px;}
+			#sort .sort-top a{font-size: 20px;}
+			#sort .tip-off div{display: none;}
+			
+			
+			
+			#product {width: 1200px;overflow: hidden;margin: 20px auto;} 
+			#product .show ul{width: 400px;height: 60px;margin: 10px auto;}
+			#product .show ul li{height:60px;float: left;margin-right: 10px;border:1px solid #ccc;}
+			#product .show li{cursor: pointer;}
+			#product .show .ol1{width: 400px;position: relative;height: 360px;margin: 20px 0 40px 0;}
+			#product .show .ol1 img{width: 360px;height: 360px;}
+			#product .show .ol1 li{position: absolute;left: 0;top:0;overflow: hidden;opacity: 0;padding: 20px;cursor: url(../img/details/zoom.cur),pointer;}
+			#product .show{width: 40%;position: relative;}
+			#product .show .big-ol{display:none;width: 360px;height: 360px;position: absolute;}
+			#product .show .pic-bottom{height: 30px;line-height: 30px;margin: 10px 70px 10px 30px;border:1px solid#ccc;border-radius: 3px;}
+			#product .show .pic-bottom span{float: left;padding: 0 20px;;}
+			
+			#product .show .flip {display: none;z-index: 100;}
+			#product .show .flip span{position: absolute;top:40%;font-size: 30px;background: #ccc;width: 30px;text-align: center;cursor: pointer;}
+			#product .show .flip .pre{left:20px;}
+			#product .show .flip .next{right:50px;}
+			#product .select{width: 60%;}
+			#product .select .sel-tit{border-bottom: 1px dashed #ccc;width: 100%;padding-bottom: 10px;}
+			#product .select .sel-tit h3{height: 30px;line-height: 30px;font-size: 20px;}
+			#product .select .sel-tit p{height: 30px;line-height: 30px;font-size: 16px;color:red;}
+			#product .select .sel-box .info{width: 140%;border-bottom: 1px dashed #ccc;}
+			#product .select .sel-box .info p{height: 30px;line-height: 30px;}
+			#product .select .sel-box .info p span{margin-left: 20px;}
+			#product .select .sel-box .chose .color .click{border: 2px solid red;}
+			#product .select .sel-box .chose .memory .click{border: 2px solid red;}
+			#product .select .sel-box .chose .color{overflow: hidden;margin: 10px ;}
+			#product .select .sel-box .chose .color span{height: 50px;line-height: 50px;}
+			#product .select .sel-box .chose .color div{float: left;width: 60px;height: 60px;border:2px solid #ccc;margin-right: 10px;}
+			#product .select .sel-box .chose .memory{height: 42px;line-height: 40px;margin: 0px 20px 10px 10px;}
+			#product .select .sel-box .chose .memory div{border:1px solid #ccc;margin-left: 10px;width: 40px;height: 40px;text-align: center;}
+			#product .select .sel-box .chose .quantity{height: 42px;line-height: 42px;}
+			#product .select .sel-box .chose .quantity input{width: 40px;height: 40px;margin:0 10px;}
+			#product .select .sel-box .chose .quantity div{}
+			#product .select .sel-box .chose .quantity .span1{width: 50px;height: 44px;line-height: 44px;color:#000;background: #fff;}
+			#product .select .sel-box .chose .quantity span{cursor: pointer;display: block;height: 18px;line-height: 18px;background: #ccc;margin-top: 2px;width: 15px;text-align: center;}
+			#product .select .sel-box .chose .span1{height: 40px;line-height: 40px;color:red;} 
+			#product .select .sel-box .chose .buy input{padding: 0 10px;color:white;background-color: orange;font-size: 20px;height: 40px;margin-right: 20px;border-radius: 3px;outline: none;border:0;cursor: pointer;}
+			#product .select .sel-box .chose .share-btn{margin: 10px 0;border: 1px solid #ccc;overflow: hidden;width: 161px;border-radius: 3px;}
+			#product .select .sel-box .chose .share-btn a{float: left;width: 80px;height: 30px;text-align: center;line-height: 30px;background-color: #EEE;color:cornflowerblue}
+			#product .select .sel-box .chose .share-btn a:first-child{border-right: 1px solid #ccc;}
+			#product .select .sel-box .chose .share-btn a:hover{color:red;text-decoration: underline;}
+			#product .select .sel-box .chose .external {}
+			#product .select .sel-box .chose .external a{float: left;width: 24px;height: 24px;background:url(../img/details/jiathis_ico_24x24.png) no-repeat;margin: 5px;}
+			#product .select .sel-box .chose .external a.share1{background-position: 0 -24px;}
+			#product .select .sel-box .chose .external a.share2{background-position: 0 -48px;}
+			#product .select .sel-box .chose .external a.share3{background-position: 0 -72px;}
+			#product .select .sel-box .chose .external a.share4{background-position: 0 -96px;}
+			#product .select .sel-box .chose .external a.share5{background-position: 0 -120px;}
+			#product .select .sel-box .chose .external a.share6{background-position: 0 -144px;}
+			#product .select .sel-rside{width: 30%;margin-top: 50px;border: 1px solid #ccc;}
+			#product .select .sel-rside div{text-indent: 10px;border-bottom: 1px solid #ccc;line-height: 30px;}
+			#product .select .sel-rside h3{height: 30px;background-color: #eee;border-bottom: 1px solid #ccc;line-height: 30px;}
+			#product .select .sel-rside .total-score{height: 30px;line-height: 30px;}
+			#product .select .sel-rside .classify-score{overflow: hidden;}
+			#product .select .sel-rside .classify-score ul{margin: 10px;}
+			#product .select .sel-rside .classify-score ul li{height: 24px;line-height: 24px;}
+			#product .select .sel-rside .classify-score .classify1{color:#666}
+			#product .select .sel-rside .classify-score .classify2{color: #D93600;}
+			#product .select .sel-rside .contact{height: 38px;overflow: hidden;}
+			#product .select .sel-rside .contact span{display: inline-block;}
+			#product .select .sel-rside .contact a{display: inline-block;margin-top: 5px;}
+			#product .select .sel-rside div:last-child{border-bottom: 0;}
+			#product .select .sel-rside div:last-child a{color:dodgerblue}
+			
+			#suggest{width: 1200px;margin: 20px auto;overflow: hidden;}
+			#suggest dl{float: left;overflow: hidden;margin-right: 20px;width: 22%;}
+			#suggest dl dt{float: left;}
+			#suggest dl dt img{width: 100px;height: 100px;}
+			#suggest dl dd span{color: red;display: block;margin: 10px;}
+			#suggest dl dd input{width: 100px;margin-left: 50px;height: 30px;background-color: #eee;border-radius: 3px;border:0}
+		
+		
+			#detail {width: 1200px;margin: 20px auto;overflow: hidden;}
+			#detail .detail-l{width: 15%;}
+			#detail .detail-l h3{height: 30px;line-height: 30px;background-color: #eee;border-bottom: 1px solid #ccc;text-indent: 10px;}
+			#detail .detail-l > div{margin-bottom: 20px;border: 1px solid #ccc;}
+			#detail .detail-l .goods-code div{margin: 20px;border: 5px solid #ccc;}
+			#detail .detail-l  .call-center dl{overflow: hidden;margin:0 20px;}
+			#detail .detail-l  .call-center dl dt{height: 26px;line-height: 26px; }
+			#detail .detail-l  .call-center dl dd{line-height: 26px;text-indent: 20px; }
+			#detail .detail-l  .call-center img{display: inline-block;}
+			
+			#detail .detail-l  .goods-sort .sort1{height: 30px;line-height: 30px;background-color: #eee;border-bottom: 1px solid #ccc;}
+			 #detail .detail-l  .goods-sort .sort1 a:hover{color: white;background-color: #666;}
+			#detail .detail-l  .goods-sort .sort1 a{display: inline-block;}
+			#detail .detail-l  .goods-sort .goods-search {overflow: hidden;}
+			#detail .detail-l  .goods-sort .goods-search input:first-child{width: 60%;float: left;margin: 5px 10px;height: 30px;}
+			#detail .detail-l  .goods-sort .goods-search input:last-child{width: 20%;float: left;height: 32px;margin: 5px 0;}
+			#detail .detail-l  .goods-sort .goods-classfiy {padding: 10px;line-height: 24px;font-weight: bold;}
+			#detail .detail-l  .goods-rank{overflow: hidden;}
+			#detail .detail-l  .goods-rank dl{padding:10px;overflow: hidden;border-bottom: 1px dashed #ccc;}
+			#detail .detail-l  .goods-rank dt{float: left;width: 40%;}
+			#detail .detail-l  .goods-rank dd{float: left;width: 60%;color: #666;}
+			#detail .detail-l  .goods-rank dd p{color: cornflowerblue;}
+			#detail .detail-l  .goods-rank dd span{display: block;}
+			/*#detail .detail-l  .goods-rank dl:last-child{border: 0;}*/
+			
+			
+			#detail .detail-l  .goods-history{overflow: hidden;}
+			#detail .detail-l  .goods-history dl{padding:10px;overflow: hidden;border-bottom: 1px dashed #ccc;}
+			/*#detail .detail-l  .goods-history dl:last-child{border: 0;}*/
+			#detail .detail-l  .goods-history dt{ }
+			#detail .detail-l  .goods-history dt img{width: 80%;height: 150px; }
+			#detail .detail-l  .goods-history dd{ color: #666;}
+			#detail .detail-l  .goods-history dd p{color: cornflowerblue;}
+			#detail .detail-l  .goods-history dd span{display: block;}
+			#detail .detail-l .other{height: 30px;line-height: 30px;width: 70%;margin: 15% ;}
+			#detail .detail-l .other a{width: 100%;height: 100%;text-align: center;display: block;border: 1px solid #D93600;background-color: orange;border-radius: 3px;}
+			#detail .detail-l .other a:hover{border: 1px solid red;background-color: coral;}
+			
+			
+			#detail .detail-r{width: 80%;margin-left: 2%;position: relative;}
+			#detail .detail-r .detail-bar{overflow: hidden;width: 100%;width: 960px;position: absolute;top:0;left: 0;}
+			#detail .detail-r .detail-bar ul{overflow: hidden;}
+			#detail .detail-r .detail-bar li{float: left;width: 25%;height: 40px;height: 40px;line-height: 40px;text-align: center;font-size: 20px;background: #eee;}
+			#detail .detail-r .detail-bar li a{display:block;width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;background: #eee;}
+			#detail .detail-r .detail-bar li a.hover{width: 99%;height: 38px;background: #fff;border: 1px solid #ccc;border-bottom: 0;}
+			#detail .detail-r .details-con{margin-top:40px;}
+			#detail .detail-r .details-con .introduce{border: 1px solid #ccc;border-top: 0;line-height: 30px;overflow: hidden;padding: 10px;}
+			#detail .detail-r .details-con .introduce li{float: left;width: 30%;}
+			#detail .detail-r .details-con .details-pic{width: 100%;margin:10px 0;padding: 20px 0;border: 1px solid #ccc;}
+			#detail .detail-r .details-con .evaluate h3{text-indent:20px;height: 30px;line-height: 30px;background-color: #eee;border-top:2px solid red;}
+			
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul>li{float: left;line-height: 24px;margin: 20px;width: 10%;}
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul .comment{width: 50%;}
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul .comment img{display: inline-block;}
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul .comment .star input{margin-left: 50px;}
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul .comment textarea{width: 100%;height: 60px;}
+			
+			
+			
+			
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul .li1 em{font-size: 30px;padding-right: 20px;font-weight: bold;font-style: normal;}
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul> .li1 p{color: red;}
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul> .li1 i{font-style: normal;color: #666;}
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul> .li3{padding-left:3%;border-left: 1px dashed #ccc;}
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul> .li3 input{border-radius: 3px;background: red;color:white;width: 80px;height: 30px;line-height: 30px;text-align: center;}
+			#detail .detail-r .details-con .evaluate .evaluate-bar>ul{overflow: hidden;}
+			#detail .detail-r .details-con .evaluate .evaluate-con{position: relative;}
+			#detail .detail-r .details-con .evaluate .evaluate-con .eva-tit{overflow: hidden;}
+			#detail .detail-r .details-con .evaluate .evaluate-con .eva-tit li{float: left;width: 25%;text-align: center;height: 40px;line-height: 40px;background: #eee;color: #666;}
+			#detail .detail-r .details-con .evaluate .evaluate-con .eva-con{overflow: hidden;height: 110px;}
+			#detail .detail-r .details-con .evaluate .evaluate-con .eva-con .eva-comment{width: 100%;border: 1px solid #ccc;border-top:0;height: 90px;overflow: hidden;}
+			#detail .detail-r .details-con .evaluate .evaluate-con .eva-con .empty{line-height: 99px;text-align: center;color: #ccc;height: 99px;}
+			#detail .detail-r .details-con .evaluate .evaluate-con .eva-con .eva-comment dl{width: 100%;border-bottom: 1px dashed #ccc;overflow: hidden;}
+			#detail .detail-r .details-con .evaluate .evaluate-con .eva-con .eva-comment dt{float: left;width: 70%;line-height: 30px;font-size: 14px;padding-left: 20px;}
+			#detail .detail-r .details-con .evaluate .evaluate-con .eva-con .eva-comment dd{float: right;width: 20%;}
+			#detail .detail-r .details-con .evaluate .evaluate-con .eva-con .eva-comment dd img{display: inline-block;}
+			
+			#detail .detail-r .details-con .advice{margin: 20px 0;}
+			#detail .detail-r .details-con .advice h3{text-indent: 20px;height: 40px;line-height: 40px;background: #eee;border-top:2px solid red}
+			#detail .detail-r .details-con .advice h3 a{color:dodgerblue;}
+			#detail .detail-r .details-con .advice div{height: 100px;line-height: 100px;text-align: center;color: #ccc;border: 1px solid #ccc;border-top:0;}
+			#detail .detail-r .details-con .recommend{overflow: hidden;}
+			#detail .detail-r .details-con .recommend h3{text-indent: 20px;height: 40px;line-height: 40px;border-bottom:2px solid red}
+			#detail .detail-r .details-con .recommend dl{width: 18%;margin-right: 10px;float: left;margin-top: 10px;border-right: 1px dashed #ccc;}
+			#detail .detail-r .details-con .recommend dl img{width: 100%;height: 80%;}
+			#detail .detail-r .details-con .recommend dd{text-align: center;}
+			#detail .detail-r .details-con .recommend dd p{color: dodgerblue;}
+			#detail .detail-r .details-con .recommend dd em{color: red;font-style: normal;}
+			
+			#product .ol-bigpic .show .ol1 .bigPic img{width:360px;}
+			#product .ol-bigpic .show .ol1 .jqzoom { display: inline-block; position: absolute; cursor: move; }
+			#product .ol-bigpic .show .ol1 div.zoomdiv { z-index: 10000; position: absolute; top: 0px; left: 0px; width: 200px; height: 200px; background: #fff;
+												border: 1px solid #ccc; display: none; text-align: center; overflow: hidden; }
+			#product .ol-bigpic .show .ol1 div.jqZoomPup { z-index: 1000; visibility: hidden; position: absolute; top: 0px; left: 0px;
+												width: 50px; height: 50px; border: 1px solid #aaa; background: #fff url(zoom.gif) 50% top no-repeat;
+												opacity: .5; -moz-opacity: .5; -khtml-opacity: .5; filter: alpha(Opacity=50); }
+			
+		
+		</style>
+		
+		
+	</head>
+	<body>
+		<div id="wrap-header"></div>
+		<div id="top_banner"></div>
+		<div id="search"></div>
+		<div id="nav"></div>
+		<div id="sort">
+			<div class="sort-top fl">
+				<a href="#">手机数码</a>><a href="#">手机</a>><a href="#">魅族</a>><span> 魅族MX4 Pro 银色 16G</span>
+			</div>
+			<div class="fr tip-off">
+				<span>举报中心<i class="fa fa-angle-down"></i></span>
+				<div><a href="#">举报该商品</a></div>
+			</div>
+		</div>
+		<div id="product">
+			<div class="show fl">
+				<div class="ol1">
+					<ol  class="ol-bigpic">
+					<!--<li class="jqzoom bigPic"><img src="../img/details/big1.jpg" jqimg="../img/details/big1.jpg"/></li>
+					<li class="jqzoom bigPic"><img src="../img/details/big2.jpg" jqimg="../img/details/big2.jpg"/></li>
+					<li class="jqzoom bigPic"><img src="../img/details/big3.jpg" jqimg="../img/details/big3.jpg"/></li>
+					<li class="jqzoom bigPic"><img src="../img/details/big4.jpg" jqimg="../img/details/big4.jpg"/></li>
+					<li class="jqzoom bigPic"><img src="../img/details/big5.jpg" jqimg="../img/details/big5.jpg"/></li>-->
+					
+					</ol>
+				
+				<!--//大图-->
+					<img src="../img/details/big1.jpg" class="big-ol"/>
+				
+				</div>
+				<ul class="ul-smallpic">
+					<!--<li><img src="../img/details/small (1).jpg" /></li>
+					<li><img src="../img/details/small (2).jpg" /></li>
+					<li><img src="../img/details/small (3).jpg" /></li>
+					<li><img src="../img/details/small (4).jpg" /></li>
+					<li><img src="../img/details/small (5).jpg" /></li>-->
+				</ul>
+				<!--上一页下一页-->
+				<div class="flip">
+					<span class="pre"><</span>
+					<span class="next">></span>
+				</div>
+				
+				<div class="pic-bottom">
+					<span><i class="fa fa-truck"></i> 开具增票</span><span><i class="fa fa-credit-card"></i> 批发采购</span><span><i class="fa fa-credit-card-alt"></i> 信用账期</span>
+				</div>
+			</div>
+			
+			
+			<div class="select fl">
+				<div class="sel-tit ">
+					<!--<h3>魅族Pro5 银白色 32G</h3>-->
+					<!--<p>魅族年度旗舰，2.5D弧面屏，3+32G内存，HIFI音质！</p>-->
+				</div>
+				<div class="sel-box fl">
+					<div class="info">
+						<!--<p>零 售 价： <span style="text-decoration: line-through;">¥2799.00</span></p>-->
+						<!--<p>批 发 价： <span style="color:red;font-size: 26px;" class="price">¥2599.00</span> 一个也批发，单单返钱花</p>-->
+						<p>商品评价:<span>*****</span><a href="#" style="color:blue">   (0条评论)</a></p>
+						<p>至　全国：  包邮 由 华伟通讯旗舰店 发货</p>
+					</div>
+					<div class="chose">
+						<div class="color">
+							<span class="fl">颜色:</span>
+							<!--<div class="cor1"><img src="../img/details/color (1).jpg"/></div>
+							<div class="cor2"><img src="../img/details/color (2).jpg"/></div>
+							<div class="cor3"><img src="../img/details/color (3).jpg"/></div>-->
+						</div>
+						<div class="memory">
+							<span class="fl">规格</span>
+							<div class="fl">32G</div>
+						</div>
+						<div class="quantity">
+							<span class="fl span1">购买数量</span>
+							<input type="text" value="1" class="fl nums" />
+							<div class="fl">
+								<span class="add1">+</span>
+								<span class="minus1">-</span>
+							</div>
+							
+						</div>
+						<div class="span1">已选择 银白色，32G</div>
+						<div class="buy">
+							<a href="cart.html"><input type="button" value="立即购买"  class="buy-btn"/></a>
+							<input type="button" value="加入购物车"  class="add"/>
+						</div>
+						<div class="share-btn">
+							<a href="#"><i class="fa fa-share"></i>分享<em>0</em></a>
+							<a href="#"><i class="fa fa-star"></i>收藏<em>0</em></a>
+						</div>
+						
+						<div class="external">
+							<a href="#" class="share1"></a>
+							<a href="#" class="share2"></a>
+							<a href="#" class="share3"></a>
+							<a href="#" class="share4"></a>
+							<a href="#" class="share5"></a>
+							<a href="#" class="share6"></a>
+						</div>
+					</div>
+					
+					
+				</div>
+				<div class="sel-rside fr">
+					<h3>华伟通讯旗舰店</h3>
+					<div class="total-score">
+						<span>综合评分</span><i>5分</i>
+					</div>
+					<div class="classify-score">
+						<ul class="fl classify1">
+							<li>店铺动态评分</li>
+							<li>描述相符5 分</li>
+							<li>服务态度5 分</li>
+							<li>发货速度5 分</li>
+						</ul>
+						<ul class="fl classify2">
+							<li>与行业相比</li>
+							<li><i class="fa fa-arrow-up">高于</i><span>2%</span></li>
+							<li><i class="fa fa-minus">持平</i><span>--</span></li>
+							<li><i class="fa fa-minus">持平</i><span>--</span></li>
+						</ul>
+					</div>
+					<div class="contact"><span>联系方式:</span><a href="#"><img src="../img/details/qq.png"/ ></a></div>
+					<div class="address">
+						<p>公司名称：成都华伟通讯有限责任公司</p>
+						<p>所  在  地：四川省 成都市 双流县</p>
+					</div>
+					
+					<div>
+						<a href="#">进入商家店铺</a>&nbsp;&nbsp;
+						<a href="#">收藏店铺</a>
+					</div>
+				</div>	
+			</div>
+		</div>
+		
+		<div id="suggest">
+			<dl>
+				<dt><img src="../img/details/suggest.jpg"/></dt>
+				<dd>
+					<p>尤妮佳Moony拉拉裤 婴儿裤型纸尿裤（男）XL3...</p>
+					<span>特价：¥91.00</span>
+					<input type="button" value="马上开抢"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt><img src="../img/details/suggest1.jpg"/></dt>
+				<dd>
+					<p>【上市公司 正品保证】52度水井坊 档次上乘 囤货...</p>
+					<span>特价：¥91.00</span>
+					<input type="button" value="马上开抢"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt><img src="../img/details/suggest2.jpg"/></dt>
+				<dd>
+					<p>苹果Apple iPhone 7Plus 玫瑰金色...</p>
+					<span>特价：¥91.00</span>
+					<input type="button" value="马上开抢"/>
+				</dd>
+			</dl>
+			<dl>
+				<dt><img src="../img/details/suggest3.jpg"/></dt>
+				<dd>
+					<p>苹果 iPad mini 4 平板电脑 7.9英寸...</p>
+					<span>特价：¥91.00</span>
+					<input type="button" value="马上开抢"/>
+				</dd>
+			</dl>
+			
+		</div>
+		
+		<div id="detail">
+			<div class="detail-l fl">
+				<div class="goods-code">
+					<h3>商品二维码</h3>
+					<div><img src="../img/details/148194.png"/></div>
+				</div>
+				
+				<div class="call-center">
+					<h3>华伟通讯旗舰店</h3>
+					<div>
+						<dl>
+							<dt>售前客服：</dt>
+							<dd>
+								<p>米修  <img src="../img/details/qq.png"/></p>
+								<p>李女士   <img src="../img/details/qq.png"/></p>
+							</dd>
+						</dl>
+						
+						<dl>
+							<dt>售后客服：：</dt>
+							<dd>
+								<p>小九    <img src="../img/details/qq.png"/></p>
+							</dd>
+						</dl>
+												
+						<dl>
+							<dt>工作时间：：</dt>
+							<dd>AM 8:30 - PM 5:30</dd>
+						</dl>
+						
+					</div>
+				</div>
+				
+				<div class="goods-sort">
+					<h3>商品分类</h3>
+					<div class="sort1">
+						<a href="#">按新品</a>
+						<a href="#">按价格</a>
+						<a href="#">按销量</a>
+						<a href="#">按人气</a>
+					</div>
+					<div class="goods-search">
+						<input type="text" placeholder="搜索店内商品"/>
+						<input type="button" value="搜索"/>
+					</div>
+					<div class="goods-classfiy">
+						<ul>
+							<li><i class="fa fa-minus"> &nbsp;</i><a href="#">全部商品</a></li>
+							<li><i class="fa fa-minus"> &nbsp;</i><a href="#">苹果</a></li>
+							<li><i class="fa fa-minus"> &nbsp;</i><a href="#">华为</a></li>
+							<li><i class="fa fa-minus"> &nbsp;</i><a href="#">中兴</a></li>
+							<li><i class="fa fa-minus"> &nbsp;</i><a href="#">小米</a></li>
+							<li><i class="fa fa-minus"> &nbsp;</i><a href="#">酷派</a></li>
+							<li><i class="fa fa-minus"> &nbsp;</i><a href="#">联想</a></li>
+							<li><i class="fa fa-minus"> &nbsp;</i><a href="#">ViVo</a></li>
+							<li><i class="fa fa-minus"> &nbsp;</i><a href="#">oppo</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				
+				<div class="goods-rank">
+					<h3>商品排行</h3>
+					<dl>
+						<dt><img src="../img/details/rank1.jpg"/></dt>
+						<dd>
+							<p>华为mate8 苍穹灰 128G</p>
+							<em>￥4399.00</em>
+							<span>收藏第一名</span>
+						</dd>
+					</dl>
+					<dl>
+						<dt><img src="../img/details/rank2.jpg"/></dt>
+						<dd>
+							<p>苹果iphone6  全网通 金色 64G</p>
+							<em>￥5288.00</em>
+							<span>收藏第二名</span>
+						</dd>
+					</dl>
+					
+					<div class="other"><a href="#">查看本店其他产品</a></div>
+				</div>
+				
+				<div class="goods-history">
+					<h3>浏览历史</h3>
+					<dl>
+						<dt><img src="../img/details/big1.jpg"/></dt>
+						<dd>
+							<p>华为mate8 苍穹灰 128G</p>
+							<em>￥4399.00</em>
+							
+						</dd>
+					</dl>
+					<dl>
+						<dt><img src="../img/details/big2.jpg"/></dt>
+						<dd>
+							<p>苹果iphone6  全网通 金色 64G</p>
+							<em>￥5288.00</em>
+							
+						</dd>
+					</dl>
+					<div class="other"><a href="#">查看本店其他产品</a></div>
+				</div>
+				
+				
+				
+			</div>
+			
+			
+			<div class="detail-r fl">
+				<div class="detail-bar">
+					<ul>
+						<li><a href="#" class="hover">商品详情</a></li>
+						<li><a href="#">商品参数</a></li>
+						<li class="comment1">商品评价(0)</li>
+						<li><a href="#">购买咨询</a></li>
+					</ul>
+				</div>
+				
+				<div class="details-con">
+					<div class="details1">
+						<ul class="introduce">
+							<li>商家货号：</li>
+       						<li>品牌：魅族</li>
+       						<li>价格：1600-3199</li>
+       						<li>屏幕尺寸：5.6英寸及以上</li>
+       						<li>系统：安卓（Android）</li>                    
+						</ul>
+						<div class="details-pic">
+							<!--<img src="../img/details/detail (1).jpg" />
+							<img src="../img/details/detail (2).jpg" />
+							<img src="../img/details/detail (3).jpg" />
+							<img src="../img/details/detail (4).jpg" />-->
+						</div>
+						<div class="evaluate">
+							<h3>商品评价</h3>
+							<div class="evaluate-bar">
+								<ul>
+									<li class="li1">
+										<div>
+											<p><em>100%</em>好评</p>
+											<i>共有0人参与评分</i>
+										</div>
+									</li>
+									
+									<li class="li2">
+										<ul>
+											<li>好评(100%)</li>
+											<li>中评(0%)</li>
+											<li>差评(0%)</li>
+										</ul>
+									</li>
+									
+									<li class="li3">
+										<p>您可对已购商品进行评价</p>
+										<a href="#"><input type="button" value="评价商品" class="evaluate-btn"/></a>
+									</li>
+									
+									<li class="comment">
+										<div class="star">
+											<img src="../img/details/star1.png" />
+											<img src="../img/details/star1.png" />
+											<img src="../img/details/star1.png" />
+											<img src="../img/details/star1.png" />
+											<img src="../img/details/star1.png"  />
+											
+											
+										</div>
+										
+										<textarea placeholder="请输入评价内容"></textarea>
+										<input type="button" value="提交评价" value='' class="sub"/>
+									</li>
+								</ul>
+							</div>
+						
+							<div class="evaluate-con">
+								<ul class="eva-tit">
+									<li>商品评价</li>
+									<li>好评</li>
+									<li>中评</li>
+									<li>差评</li>
+								</ul>
+								<div class="eva-con">
+									<div class="eva-comment">
+										<dl>
+											<dt>123456</dt>
+											<dd>
+												<img src="../img/details/star2.png" />
+												<img src="../img/details/star2.png" />
+												<img src="../img/details/star2.png" />
+											</dd>
+										</dl>
+										<!--<div class="empty">暂无符合条件的数据记录</div>-->
+									</div>
+									<div><a href="#">查看更多...</a></div>
+									<!--<div>暂无符合条件的数据记录</div>
+									<div>暂无符合条件的数据记录</div>
+									<div>暂无符合条件的数据记录</div>-->
+								</div>
+							</div>
+						</div>
+						
+						<div class="advice">
+							<h3><a href="#">购买咨询</a></h3>
+							<div>还没有咨询内容</div>
+						</div>
+						
+						<div class="recommend">
+							<h3>推荐商品</h3>
+							<div>
+								<dl>
+									<dt><img src="../img/details/big1.jpg"/></dt>
+									<dd>
+										<p>华为mate8 苍穹灰 128G</p>
+										<em>￥4399.00</em>
+									</dd>
+								</dl>
+								<dl>
+									<dt><img src="../img/details/big2.jpg"/></dt>
+									<dd>
+										<p>苹果iphone6  全网通 金色 64G</p>
+										<em>￥5288.00</em>
+									</dd>
+								</dl>
+								<dl>
+									<dt><img src="../img/details/big1.jpg"/></dt>
+									<dd>
+										<p>华为mate8 苍穹灰 128G</p>
+										<em>￥4399.00</em>
+										
+									</dd>
+								</dl>
+								<dl>
+									<dt><img src="../img/details/big2.jpg"/></dt>
+									<dd>
+										<p>苹果iphone6  全网通 金色 64G</p>
+										<em>￥5288.00</em>
+									</dd>
+								</dl>
+								<dl>
+									<dt><img src="../img/details/big1.jpg"/></dt>
+									<dd>
+										<p>华为mate8 苍穹灰 128G</p>
+										<em>￥4399.00</em>
+										
+									</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+				
+			</div>
+		</div>
+		
+		<div id="wrap_service"></div>
+		<div id="foot-link"></div>
+		<div id="footer"></div>
+		
+		
+		<script type="text/javascript">
+			
+			$(function(){
+				$('#wrap-header').load('sub/header.html');
+				$('#top_banner').load('sub/top_banner.html');
+				$('#search').load('sub/search.html');
+				$('#nav').load("sub/nav.html");
+				$("#foot-link").load("sub/foot-link.html");
+				$("#footer").load("sub/footer.html")
+				$("#wrap_service").load("sub/service.html")
+				
+				
+				//点击跳转到评价
+				console.log($('#detail .comment1'))
+				
+				$('#detail .comment1').click(function(){
+						console.log("111")
+						document.documentElement.scrollTop=document.body.scrollTop=8100;
+						
+					})
+				//判断是否保存了账号和密码
+					
+  			  	var oldUsername = getCookie("username");
+   			 	var oldPassword = getCookie("userpass");
+   			 	//console.log(oldUsername);
+   			 	 if (oldUsername.length) {
+	   			 	 	//.log('111');
+	   			 	 	//$('.evaluate-btn').closest('a').prop('href',"#").bind(function(){});
+	   			 	 	$('.evaluate-btn').unwrap('a')
+							
+   			 	 }else{
+	   			 	 	$('.evaluate-btn').click(function(){
+	   			 	 		
+	   			 	 		$(this).closest('a').prop('href',"login.html");
+	   			 	 	})
+   			 	 }
+				
+				
+   			 
+			})
+			
+		</script>
+	</body>
+</html>

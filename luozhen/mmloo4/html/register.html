@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/common.css" />
+		<style type="text/css">
+			a:hover{color: red;}
+			label{color: red;line-height: 40px;}
+			.register{width:800px;overflow: hidden;margin: 10px auto;box-shadow: 0 0 30px rgba(181,181,181,0.5);}
+			.register .box-h3{width: 100%;overflow: hidden;border-bottom: 1px solid #ccc;}
+			.register h3{height: 50px;width: 180px;margin:0 auto;line-height: 50px;border-bottom: 2px solid red;font-size:26px}
+			.register form{width: 400px;overflow: hidden;margin: 20px auto;background: #eee;}
+			.register form div{height: 80px;position: relative;}
+			.register form div em{width: 100%;height: 30px;display: block;color:red}
+			.register form div i{position: absolute;right: 16px;top:10px;font-size: 20px;color:red;width:23px}
+			.register input{display: block;width: 396px;height: 40px;text-indent: 20px;font-size: 20px;}
+			.register form div.verify1{height: 74px;}
+			.register form div.verify1 a{height: 44px;line-height: 44px;}
+			.register form div.verify1 input{width:150px;float: left;}
+			.register form div.verify1 .code-verfify1{width: 100px;height:44px;margin:0 20px;float: left;background-color:mediumpurple;line-height: 44px;text-align: center;}
+			.register form div.verify1 i{left:130px}
+			.register form div.verify1 em{position: absolute;bottom: 0;}
+			.register form div.verify2{height: 74px;}
+			.register form div.verify2 input{width: 150px;float: left;}
+			.register form div.verify2 .code-verfify2{text-indent:0;width: 100px;height:44px;margin:0 30px 0 20px;float: left;line-height: 44px;text-align: center;font-size:12px}
+			.register form div.verify2 em{position: absolute;bottom: 0;}
+			.register form div.verify2 i{left:130px;}
+			.register form .sub{margin: 10px 0;background-color: red;color: white;text-indent: 0;}
+			.register form .check input{width: 15px;height: 15px;}
+			.register form .check p{margin: 0 10px;}
+			.register form .check{padding-left: 40px;height: 40px;}
+			.register form em{font-size: 14px;}
+			#re-logo{width:1200px;overflow: hidden;margin: 10px auto;position: relative;}
+			#re-logo .logo-m{height: 75px;line-height: 75px;font-size: 26px;}
+			#re-logo p{position: absolute;bottom: 0;right: 0;}
+		</style>
+		
+		<script type="text/javascript" src="../js/base.js" ></script><!--cookie-->
+		<script type="text/javascript" src="../lib/jquery-2.1.1.min.js" ></script>
+		
+	</head>
+	<body>
+		<div id="top_banner">
+			<a href="#"><img src="../img/top/topbanner.jpg"/></a>
+		</div>
+		
+		<div id="re-logo">
+			<div class="logo fl"><a href="#"><img src="../img/top/logo.png" /></a></div>
+			<div class="logo-m fl">欢迎注册</div>
+			<p class="fr">已注册，请<a href="login.html">登录</a></p>
+		</div>
+		
+		<div class="register">
+				<div class="box-h3"><h3>个人用户注册</h3></div>
+				<form id="register-form">
+					<div>
+						<input type="text" placeholder="手机号码" id="phone" name="phone" class="phone"/>
+						<i>*</i>
+						<em class="phone-em">该项必填</em>
+					</div>
+					
+					<div>
+						<input type="text" placeholder="设置密码" id="password" name="password" class="pass" />
+						<i>*</i>
+						<em class="pass-em">该项必填</em>
+					</div>
+					
+					<div class="verify1">
+						<input type="text" placeholder="验证码" id="verify1" name="verify1" class="verify1-input"/>
+						<i>*</i>
+						<input type="button" value="1234"  class="code-verfify1"></input>
+						<em class="verify1-em">该项必填</em>
+						
+						<!--<a href="#" class="change1">看不清，请换一张</a>-->
+					</div>
+					
+					<div class="verify2">
+						<input type="text" placeholder="短信验证码" id="verify2" name="verify2" class="verify2-input"/>
+						<i>*</i>
+						<input type="button" value="获取短信验证码" class="code-verfify2"/>
+						<em class="verify2-em">该项必填</em>
+					</div>
+					
+					<div>
+						<input type="text" placeholder="好友推荐码（非必填）" />
+						
+					</div>
+						
+					<div class="check">
+						<input type="checkbox" class="fl check-box"/> 
+						<p class="fl">阅读并同意</p><a href="#" class="fl">服务协议</a>
+					</div>
+					
+					<div>
+						<input type="button" value="立即注册" class="sub"/>	
+						
+					</div>
+					
+					
+					
+				</form>
+		</div>
+			
+		<div id="footer"></div>
+			
+			<script type="text/javascript">
+				$(function(){
+					
+					$('#footer').load("sub/footer.html");
+					
+					//生成随机颜色
+					function randomColor(){
+						return "rgba("+parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+","+parseInt(Math.random()*256)+","+Math.random()+")";
+					}
+					
+					console.log(document.cookie);
+					//判断是否保存了账号和密码
+	                var oldUsername = getCookie("username");
+	                var oldPassword = getCookie("userpass");
+					//console.log(document.cookie);
+					//console.log(oldUsername.length)
+	                if (oldUsername.length) {
+	                    $('#phone').val(oldUsername);
+	                    $('#password').val(oldPassword);
+	                } 
+					
+					
+					
+					var code1 = Math.floor(Math.random()*9000)+1000;
+				
+				//	console.log(randomColor);
+					
+					$('.code-verfify1').val(code1);
+					//看不清换一张
+					$('.code-verfify1').click(function(){
+						
+						var code3 = Math.floor(Math.random()*9000)+1000;
+						$('.code-verfify1').val(code3);
+						$('.code-verfify1')[0].style.backgroundColor=randomColor();
+					//	console.log($('.code-verfify1')[0])
+						return false;
+					})
+					
+					//短信验证码
+					$('.code-verfify2').click(function(){
+						var code2 = Math.floor(Math.random()*9000)+1000;
+						$(this).val(code2).css('font-size','20px');
+					})
+					
+					//触发验证事件
+					
+					
+					var a=b=c=d=0;
+					function xonblur(){
+						
+						var regphone=/^[1-9]\d{10}/;
+						var regpass=/[a-zA-Z0-9_]{6,20}/;
+					//	var x=document.getElementsByClassName('phone')[0];
+						
+							//x.onblur=function(){
+						$('#register-form .phone')[0].onblur=function(){
+							var strphone=$('#register-form .phone').val().replace(/^\s+/,'').replace(/\s+$/,'');
+							//console.log($('#register-form .phone'))
+							//console.log($('#register-form .phone').val())
+							//console.log(regphone.test(strphone))
+							if(!regphone.test(strphone)){
+								$('#register-form .phone-em').html('请输入首位不为0的11位电话号码');
+								a=0;
+							}else{
+								$('#register-form .phone-em').html('')
+								a=1;
+							}
+							//	console.log(a)
+							}
+						
+						/*if(regphone.test(strphone)&&regpass.test( strpass)&&strverfify1==codeverfify1&&strverfify2==codeverfify2){
+							return 1
+						}*/
+						
+						$('#register-form .pass').blur(function(){
+							var strpass=$('#register-form .pass').val().replace(/^\s+/,'').replace(/\s+$/,'');
+							if(!regpass.test( strpass)){
+								$('#register-form .pass-em').html('请输入6~20位密码，密码只能为数字字母下划线')
+								b=0;
+							}else{
+								$('#register-form .pass-em').html('');
+								b=1;
+							}
+						//	console.log(b)
+						})
+						
+						$('#register-form .verify1-input').blur(function(){
+							var strverfify1=$('#register-form .verify1-input').val().replace(/^\s+/,'').replace(/\s+$/,'');
+							var codeverfify1=$('#register-form .code-verfify1').val();
+							if(strverfify1!=codeverfify1){
+								$('#register-form .verify1-em').html('验证码输入错误')
+								c=0;
+							}else{
+								$('#register-form .verify1-em').html('');
+								c=1;
+							}
+						//	console.log(c)
+						})
+						
+						$('#register-form .verify2-input').blur(function(){
+							var strverfify2=$('#register-form .verify2-input').val().replace(/^\s+/,'').replace(/\s+$/,'');
+							var codeverfify2=$('#register-form .code-verfify2').val();
+							if(strverfify2!=codeverfify2){
+								$('#register-form .verify2-em').html('验证码输入错误')
+								d=0;
+							}else{
+								$('#register-form .verify2-em').html('');
+								d=1
+							}
+							//console.log(d)
+						})
+						
+						
+					}	
+					
+				
+				
+				
+					//调用函数
+					xonblur();
+					var date1=new Date();
+					
+					
+					//点击注册按钮
+					$('.sub').click(function(){
+						console.log($('.check-box')[0].checked)
+						//全部验证通过才能提交
+						
+						/*console.log(a+'，'+typeof a)
+						console.log(b+'，'+typeof b)
+						console.log(c+'，'+typeof c)
+						console.log(d+'，'+typeof d)*/
+						console.log(a&b&&c&&d)
+						if(a&b&&c&&d){
+							// 设置cookie
+							//removeCookie("username")
+							//removeCookie("userpass")
+							console.log($('.check-box')[0].checked)
+							if($('.check-box')[0].checked){
+								var username=$('#phone').val();
+								var userpass=$('#password').val();
+								console.log(username+","+userpass);
+								
+								date1.setDate(date1.getDate()+10);
+								setCookie("username", username, date1);
+	                      	    setCookie("userpass", userpass, date1);
+	                       		console.log("提交之后："+document.cookie);
+							}
+							
+							
+							//跳转到登录页面
+						
+						
+							//表单验证通过后跟 api 进行 交互
+			                    $.get("../data/response.json", $('form').serialize(), function (response) {
+			                        if (response) {
+			                            response = typeof response == 'string' ? JSON.parse(response) : response;
+			                            if (response.state) {
+			                               alert('注册成功，请到登陆界面进行登陆!');
+			                               window.location.href="login.html";
+			                            } else {
+			                                alert(response.message);
+			                            }
+			                        }
+			                    });
+						
+						}
+						
+							
+						
+							
+						})
+						
+						/*$('#register-form').validate({
+							
+						rules: {
+									phone: {
+										required: true,
+										minlength: 11,
+										maxlength:11,
+										number:true,
+									},
+									password: {
+										required: true,
+										minlength: 6,
+										maxlength:20
+										
+									},
+									verify1:{
+										required: true,
+										equalTo:".code-verfify1",
+									},
+									verify2:{
+										required: true,
+										equalTo:".code-verfify2",
+									}
+							},
+							
+							
+							messages:{
+								phone: {
+										required: "这是必填项",
+										minlength: "电话号码长度为11",
+										maxlength: "电话号码长度为11",
+										number:"必须为数字"
+									},
+									password: {
+										required: "这是必填项",
+										minlength: "密码长度最小6位，最高20位",
+										maxlength: "密码长度最小6位，最高20位",
+										
+									},
+									
+									verify1:{
+										required: "这是必填项",
+										equalTo:"验证码错误",
+									},
+									verify2:{
+										required: "这是必填项",
+										equalTo:"验证码错误",
+									}
+								
+							}
+						});*/
+					
+					
+				
+					
+					
+					
+						
+						
+				//	})
+				//removeCookie("username")
+				//removeCookie("userpass")
+					
+				
+				
+				})
+			</script>
+		
+	</body>
+</html>

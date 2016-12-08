@@ -1,0 +1,92 @@
+			<div id="header">
+				<div class="head-l fl">
+					<a href="login.html" class="a1">登录</a>|
+					<a href="register.html" class="a2">注册</a>
+				</div>
+				
+				<div class="head-r fr">
+					<ul class="head-nav">
+						<li>
+							<a href="cart.html" >购物车</a><i class="fa fa-angle-down"></i>
+							<!--<div class="head-box">
+								<a href="#">商品收藏</a> 
+								<a href="#">商品收藏</a> 
+								<a href="#">商品收藏</a>
+							</div>-->
+						</li>
+						<li>
+							<a href="#">用户中心</a><i class="fa fa-angle-down"></i>
+							<div class="head-box">
+								<a href="#">商品收藏</a> 
+								<a href="#">商品收藏</a> 
+								<a href="#">商品收藏</a>
+							</div>
+						</li>
+						<li>
+							<a href="#">我的订单</a><i class="fa fa-angle-down"></i>
+							<div class="head-box">
+								<a href="#">商品收藏</a> 
+								<a href="#">商品收藏</a> 
+								<a href="#">商品收藏</a>
+							</div>
+						</li>
+						<li>
+							<a href="#">客户服务</a><i class="fa fa-angle-down"></i>
+							<div class="head-box">
+								<a href="#">商品收藏</a> 
+								<a href="#">商品收藏</a> 
+								<a href="#">商品收藏</a>
+							</div>
+						</li>
+						<li>
+							<a href="#">网站导航</a><i class="fa fa-angle-down"></i>
+							<div class="head-box">
+								<a href="#">商品收藏</a> 
+								<a href="#">商品收藏</a> 
+								<a href="#">商品收藏</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+		<script type="text/javascript">
+		$(function(){
+			//head
+			console.log(document.cookie);
+			$('.head-r').find('li').mouseover(function(evt){
+				$(this).css("background-color","white").find(".head-box").css({display:'block'})
+			}).mouseout(function(){
+				$(this).css("background-color","#fafafa").find(".head-box").css({display:'none'})
+			})
+			
+			$('.head-box').find('a').mouseover(function(){
+					$(this).css("background-color","#fafafa")
+				}).mouseout(function(){
+					$(this).css("background-color","#fff")
+				})
+				
+				
+			console.log(document.cookie);
+			//判断是否保存了账号和密码
+		    var oldUsername = getCookie("username");
+		    var oldPassword = getCookie("userpass");
+			
+		    if (oldUsername.length) {
+		    	console.log(oldUsername.length)
+		    	console.log($('#header .head-l').find('a1'))
+		    	//$("#wrap_banner").find('.entry').hide()
+		    	//$("#wrap_banner").find('.wel-1').css('padding',47)
+		    	$('#header .head-l').find('.a1').html('您好，'+oldUsername+'欢迎来到米米乐商城')
+		      	$('#header .head-l').find('.a2').html('[退出]')
+		      	$('#header .head-l').find('.a2').click(function(){
+		      		removeCookie("username");
+		      		removeCookie("userpass");
+		      		window.location.href='login.html'
+		      	})
+		       
+		    } 	
+					
+		})
+			
+		</script>

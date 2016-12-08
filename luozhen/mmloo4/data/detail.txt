@@ -1,0 +1,34 @@
+{	
+	"meizu"	:{	"name":"魅族Pro5 银白色 32G",
+			"introduce":"魅族年度旗舰，2.5D弧面屏，3+32G内存，HIFI音质！",
+			"retailprice":"¥2799.00",
+			"tradeprice":"¥2599.00",
+			"pic":{
+				"bigpic":["../img/details/big1.jpg", "../img/details/big2.jpg" ,"../img/details/big3.jpg" ,"../img/details/big4.jpg" ,"../img/details/big5.jpg" ],
+				"smallpic":["../img/details/small (1).jpg","../img/details/small (2).jpg","../img/details/small (3).jpg","../img/details/small (4).jpg","../img/details/small (5).jpg"],
+				"chosecolor":["../img/details/color (1).jpg","../img/details/color (2).jpg","../img/details/color (3).jpg"],
+				"detailspic":["../img/details/detail (1).jpg","../img/details/detail (2).jpg","../img/details/detail (3).jpg","../img/details/detail (4).jpg"]
+				
+			
+			
+			}
+		
+		},
+		
+		
+	"huawei"	:{	"name":"华为荣耀1 畅玩5C 2GB+16GB",
+			"introduce":"魅族年度旗舰，2.5D弧面屏，3+32G内存，HIFI音质！",
+			"retailprice":"¥2799.00",
+			"tradeprice":"¥2599.00",
+			"pic":{
+				"bigpic":["../img/details/big1.jpg", "../img/details/big2.jpg" ,"../img/details/big3.jpg" ,"../img/details/big4.jpg" ,"../img/details/big5.jpg" ],
+				"smallpic":["../img/details/small (1).jpg","../img/details/small (2).jpg","../img/details/small (3).jpg","../img/details/small (4).jpg","../img/details/small (5).jpg"],
+				"chosecolor":["../img/details/color (1).jpg","../img/details/color (2).jpg","../img/details/color (3).jpg"],
+				"detailspic":["../img/details/detail (1).jpg","../img/details/detail (2).jpg","../img/details/detail (3).jpg","../img/details/detail (4).jpg"]
+				
+			
+			
+			}
+		
+		}	
+}

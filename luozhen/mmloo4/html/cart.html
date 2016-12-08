@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css" />
+		<script type="text/javascript" src="../lib/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="../js/index.js"></script>
+		<script type="text/javascript" src="../js/base.js" ></script><!--cookie-->
+		
+		<style type="text/css">
+			#logo{width: 1200px;margin: 20px auto;overflow: hidden;}
+			#logo a{display: inline-block;margin-right: 20px;float: left;}
+			#cart{width: 1200px;margin: 20px auto}
+			#cart h3{height: 50px;line-height: 50px;font-size: 30px;}
+			#cart .goods-cart{margin: 20px auto;width: 70%;}
+			/*#cart .goods-cart table th{border-spacing: 0;border-collapse: collapse;}*/
+			#cart .goods-cart tr{height: 50px;overflow: hidden;border-bottom: 2px solid #000;margin-bottom: 5px;}
+			#cart .goods-cart .tr1 {background: #f9f9f9;}
+			#cart .goods-cart .cart-body {background: #fffdee;}
+			#cart .goods-cart tr img{width: 50px;height: 50px;float: left;}
+			#cart .goods-cart tr td:first-child input{width: 20px;height: 20px;}
+			#cart .goods-cart th{text-align: center;font-size: 20px;}
+			#cart .goods-cart th input{height: 20px;width: 20px;}
+			#cart .goods-cart td{text-align: center;}
+			#cart .goods-cart input{width: 30px;height: 30px;line-height: 30px;}
+			#cart .goods-cart .minus,#cart .goods-cart .plus {cursor:pointer;width: 20px;height: 20px;background: #eee;margin: 5px;display: inline-block;text-align: center;}
+			#cart .goods-cart .td1{width: 10%;}
+			#cart .goods-cart .td2{width: 35%;}
+			#cart .goods-cart .td3{width: 10%;}
+			#cart .goods-cart .td4{width: 20%;}
+			#cart .goods-cart .td5{width: 15%;}
+			#cart .goods-cart .td6{width: 10%;}
+			#cart .total-p{height: 50px;font-size: 26px;line-height: 50px;text-align: right;width: 70%;}
+			#cart .total1{color: red;}
+			#cart .account1{margin-left: 50px;height: 30px;width: 10%;background-color: #1E90FF;color: white;}
+		</style>
+	</head>
+	<body>
+		<div id="wrap-header"></div>
+		<div id="top_banner"></div>
+		<div id="logo">
+			<a href="index.html"><img src="../img/top/logo.png"  class="fl"/></a>
+			<a href="list.html">返回列表页</a><a href="details.html">返回详情页</a>
+			<img src="../img/top/cart-r.jpg" class="fr"/>
+		</div>
+		<div id="cart">
+			<h3>我的购物车</h3>
+			<p>查看购物车商品清单，增加减少商品数量，并勾选想要的商品进入下一步操作</p>
+			<table class="goods-cart">
+				<tr class="tr1">
+					<th class="td1"><input type="checkbox" class="select-all"/>全选</th>
+					<th class="td2">商品</th>
+					<th class="td3">单价</th>
+					<th class="td4">数量</th>
+					<th class="td5">小计</th>
+					<th class="td6">操作</th>
+				</tr>
+				
+				<tbody class="cart-body"></tbody>
+				<!--<tr><td><input type="checkbox"/></td><td><img src="../img/details/306_05109398327213783_60.jpg"/><p>华为荣耀 畅玩5C 2GB+16GB 落日金 联通移动4G手机 双卡双待</p></td>
+					<td class="single">￥<span>19.90</span></td><td><span class="minus">-</span><input type="text" value="1" class="num"/><span class="plus">+</span></td><td class="total">￥<span>19.90</span></td><td><a href="#" class="delete">删除</a></td>
+				</tr>-->
+				
+			</table>
+			
+			<p class="total-p">
+				总计：<span class="total1">0</span><span>元</span>
+				<input type="button" value="去结算" class="account1" />
+			</p>
+			
+		</div>
+		<div id="foot-link"></div>
+		<div id="footer"></div>
+		
+			<script type="text/javascript">
+				
+				$(function(){
+					$('#wrap-header').load('sub/header.html');
+					$('#top_banner').load('sub/top_banner.html');
+					
+					$("#foot-link").load("sub/foot-link.html");
+					$("#footer").load("sub/footer.html");
+					
+					function joinCookie(){
+        					var tem_name=arrName.join("&");
+							var tem_price=arrPrice.join("&");
+							var tem_src=arrSrc.join("&");
+							var tem_num=numarr.join("&");
+							removeCookie(NAMES);
+							removeCookie(PRICES);
+							removeCookie(SRCS);
+							removeCookie(NUMS);
+							var d=new Date();
+							d.setDate(d.getDate()+10);
+							setCookie(NAMES,tem_name,d);
+							console.log("tem_name:"+tem_name);
+							setCookie(PRICES,tem_price,d);
+							setCookie(SRCS,tem_src,d);
+							setCookie(NUMS,tem_num,d);
+        					//console.log(c_namearr)
+        			}
+					
+					
+					function savegood(name,price,src){
+						console.log("namearr"+c_namearr);
+						c_namearr.push(name);
+						c_pricearr.push(price);
+						c_srcarr.push(src);
+					//	c_numarr.push(num);
+						//数组转成字符串
+					//	console.log("numarr:"+c_numarr);
+						
+						var tem_name=c_namearr.join("&");
+						var tem_price=c_pricearr.join("&");
+						var tem_src=c_srcarr.join("&");
+					//	var tem_num=c_numarr.join("$")
+						//console.log("tem_name:"+tem_name);
+						removeCookie(NAMES);
+						removeCookie(PRICES);
+						removeCookie(SRCS);
+					//	removeCookie(NUMS);
+						
+						var d=new Date();
+						d.setDate(d.getDate()+7);
+						
+						setCookie(NAMES,tem_name,d);
+						console.log("tem_name:"+tem_name);
+						setCookie(PRICES,tem_price,d);
+						setCookie(SRCS,tem_src,d);
+					//	setCookie(NUMS,tem_num,d);
+					
+					}//savegood
+					
+					function plus_minus(){
+						
+						//减
+						$('#cart .minus').click(function(evt){
+							var num=parseFloat($(this).parent().parent().find(".num").val());
+							var single=parseFloat($(this).parent().parent().find('.single span').html())
+							//console.log(evt.target);
+							num--;
+							if(num<=0){
+								num=0;
+								//删除该行
+								evt.target.parentNode.parentNode.parentNode.removeChild(evt.target.parentNode.parentNode);
+								
+							}
+							var total=single*num;
+							//console.log($('#cart .total span'))
+							
+							$(this).parent().parent().find(".num").val(num);
+							$(this).parent().parent().find('.total span').html(total);
+							
+							//获取name
+        					var name=$(this).closest('tr').find('.tit').text();
+        					var index=0;//获取下标
+        					for(var i=0;i<arrName.length;i++){
+        						if(name==arrName[i]){
+        							index=i;
+        							
+        						}
+        					}
+        					numarr[index]--;
+        					console.log(index)
+        					console.log(numarr[index])
+        					if(numarr[index]==0){
+        						//删除该产品cookie
+        							arrName.splice(index,1);
+        							
+        							arrPrice.splice(index,1);
+        							arrSrc.splice(index,1);
+        							numarr.splice(index,1);
+        							console.log(getCookie(NUMS));
+        							//删除该产品cookie
+        					
+        					}
+        					joinCookie();//重新设置cookie
+        					
+        					//每减一次根据name删除c_namearr中的数据，和对应c_srcarr中的数据
+        					c_namearr.splice(index,1);
+        					c_pricearr.splice(index,1);
+        					c_srcarr.splice(index,1);
+        					var tem_name=c_namearr.join("&");
+							var tem_price=c_pricearr.join("&");
+							var tem_src=c_srcarr.join("&");
+						//	var tem_num=c_numarr.join("$")
+							//console.log("tem_name:"+tem_name);
+							removeCookie(NAMES);
+							removeCookie(PRICES);
+							removeCookie(SRCS);
+					//		removeCookie(NUMS);
+						
+							var d=new Date();
+							d.setDate(d.getDate()+7);
+							
+							setCookie(NAMES,tem_name,d);
+							console.log("tem_name:"+tem_name);
+							setCookie(PRICES,tem_price,d);
+							setCookie(SRCS,tem_src,d);
+        					console.log(getCookie("NUMS"))
+        					console.log(getCookie("NAMES"))
+        					console.log(getCookie("PRICES"))
+        					
+						})
+						
+						//加
+						$('#cart .plus').click(function(){
+							
+							var num=parseFloat($(this).parent().parent().find(".num").val());
+							var single=parseFloat($(this).parent().parent().find('.single span').html())
+							
+							num++;
+							var total=single*num;
+							$(this).parent().parent().find(".num").val(num);
+							$(this).parent().parent().find('.total span').html(total);
+							//获取name
+        					var name=$(this).closest('tr').find('.tit').text();
+        					//获取价格
+        					var price=parseFloat($(this).closest('tr').find('.single span').text());
+        					//获取src
+        					var src=$(this).closest('tr').find('.tit').prev().prop("src");
+        					console.log(src);
+        					savegood(name,price,src);
+        					console.log(getCookie("NAMES"))
+						})
+						
+						
+						//删除
+						$(document).click(function(evt){
+							var oevent=evt||event;
+							//delete
+        					if(oevent.target.innerHTML=="删除"){
+        						
+	        						//removeCookie()
+	        					oevent.target.parentNode.parentNode.parentNode.removeChild(oevent.target.parentNode.parentNode);
+	        					//delCookie();
+	        					//删除cookie
+								//获取name
+		    					var name=$(oevent.target).closest('tr').find('.tit').text();
+		    					console.log(name);
+		    					for(var i=0;i<arrName.length;i++){
+		    						if(name==arrName[i]){
+		    							arrName.splice(i,1);
+		    							arrPrice.splice(i,1);
+		    							arrSrc.splice(i,1);
+		    							numarr.splice(i,1);
+		    						}
+		    					}
+		    					joinCookie();
+        					}
+						})
+						
+						
+						
+						
+						
+					}//加减删除函数
+					
+					
+					
+					
+					
+					//console.log(document.cookie)
+						var NAMES="NAMES";
+						var PRICES="PRICES";
+						var SRCS="SRCS";
+						var NUMS="NUMS";
+						//获取cook
+						var c_namestr=getCookie("NAMES");
+						var c_pricestr=getCookie("PRICES");
+                		var c_srcstr=getCookie("SRCS");
+                		var c_numstr=getCookie("NUMS");
+                		
+                		var c_namearr=[];
+						var c_pricearr=[];
+                		var c_srcarr=[];
+                		var c_numarr=[];//存放数量
+                		console.log(c_namestr);
+						if(c_namestr){
+							c_namearr=c_namestr.split("&");
+						 	c_pricearr=c_pricestr.split("&");
+							c_srcarr=c_srcstr.split("&");
+							c_numarr=c_numstr.split("&");
+						}
+						
+						//处理cookie;
+						var arrName=[];
+						var arrPrice=[];
+						var arrSrc=[];
+						var numarr=[];
+						
+						var temName=[];
+						for(x in c_namearr){
+							temName.push(c_namearr[x]);
+						}
+						var temPrice=[];
+						for(x in c_pricearr){
+							temPrice.push(c_pricearr[x]);
+						}
+						var temSrc=[];
+						for(x in c_srcarr){
+							temSrc.push(c_srcarr[x]);
+						}
+						
+						console.log(temName===c_namearr)
+						
+						//处理cookie函数，合并产品
+					function cookieDeal( temName,temPrice,temSrc){
+						var tem1=''
+						var tem2=''
+						var tem3=''
+						
+						var count=0;
+						
+						for(var i=0;i<temName.length;i++){
+							if(temName[i]!='-1'){
+								tem1=temName[i];
+								tem2=temSrc[i];
+								tem3=temPrice[i];
+								
+								for(var j=0;j<temName.length;j++){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+									if(tem1==temName[j]){
+										console.log('相等')
+										count++;
+										temName[j]=-1;//等于-1不再参与下次循环
+										temPrice[j]=-1;
+										temSrc[j]=-1;
+									}
+								}
+								
+								arrName.push(tem1);
+								arrPrice.push(tem3);
+								arrSrc.push(tem2);
+								numarr.push(count);
+								count=0;
+							}
+							
+						}
+						
+						//c_namearr=arrName;
+						console.log(numarr);
+						console.log(arrPrice)
+						console.log(arrSrc);
+						
+					}//cookiedeal
+
+						
+						
+						cookieDeal( temName,temPrice,temSrc)
+						/*console.log(arrName)
+						console.log(numarr);
+						console.log(arrPrice);//src
+						console.log(arrSrc);//price*/
+						
+						var tstr='';
+						
+						//console.log(c_numarr)
+						removeCookie("NUMS");
+						var tem_num=numarr.join("&");
+						var d=new Date();
+						d.setDate(d.getDate()+7);
+						setCookie(NUMS,tem_num,d);
+						
+						
+						
+						for(var i=0;i<arrName.length;i++){
+							tstr+="<tr><td><input type='checkbox' class='chec'/></td><td><img src='"+arrSrc[i]+"'/><p class='tit'>"+arrName[i]
+								+"</p></td><td class='single'>￥<span>"+arrPrice[i]
+								+"</span></td><td><span class='minus'>-</span><input type='text' value='"+numarr[i]+"' class='num'/><span class='plus'>+</span></td><td class='total'>￥<span>"
+								+arrPrice[i]*numarr[i]+"</span></td><td><a href='#' class='delete'>删除</a></td></tr>"
+								
+						}
+					
+							$(tstr).appendTo('.cart-body');
+							plus_minus();
+							
+							
+							//总价
+							
+							
+							$('.cart-body').find(":checkbox").click(function(evt){
+								var total=0;
+								$('.cart-body input:checked').each(function(){
+									var x=parseFloat($(this).closest("tr").find(".total span").text());
+									total+=x;
+								})
+								
+								$('#cart .total1').html(total);
+								
+							})
+							
+							
+							
+							//全选
+							$('.goods-cart').find('.select-all').click(function(){
+								var total=0;
+								console.log($(this).prop('checked')==true)
+								if($(this).prop('checked')==true){
+									$('.cart-body :checkbox').prop('checked','checked');
+									$('.cart-body input:checked').each(function(){
+										var x=parseFloat($(this).closest("tr").find(".total span").text());
+										total+=x;
+									})
+									$('#cart .total1').html(total);
+									
+								}else{
+									$('.cart-body :checkbox').removeAttr('checked');
+									$('#cart .total1').html(total);
+								}
+								
+								
+								
+							})
+				
+							
+				})	
+			</script>
+	</body>
+</html>

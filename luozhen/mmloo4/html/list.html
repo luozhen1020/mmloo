@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css" />
+		<script type="text/javascript" src="../lib/jquery-2.1.1.min.js"></script>
+		<!--<script type="text/javascript" src="../js/index.js"></script>-->
+		<script type="text/javascript" src="../js/base.js" ></script><!--cookie-->
+		<style type="text/css">
+			a:hover{color: red;}
+			#nav .menu{display: none;}
+			#product-list{width: 1200px;margin: 20px auto;overflow: hidden;}
+			#product-list .pro{overflow: hidden;margin-bottom: 50px;}
+			#product-list .pro dl{width: 23%;float: left;margin: 1%;overflow: hidden;}
+			#product-list .pro dt{height: 250px;}
+			#product-list .pro dd{text-align: center;height: 90px;line-height: 30px;margin: 0 auto;}
+			#product-list .pro dd p{}
+			#product-list .pro dd p.tit{overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+			#product-list .pro dd p.tit a{font-size: 14px;}
+			#product-list .pro dd p.price{color:red;font-size: 20px;}
+			#product-list .pro-btn{overflow: hidden;width:60%;margin: 50px auto;position: relative;}
+			#product-list .pro-btn span{float: left;padding: 5px 20px;height: 30px;line-height: 30px;text-align: center;background: #ccc;border:1px solid #666;cursor: pointer;}
+			#product-list .pro-left{width: 17%;overflow: hidden;float:left}
+			#product-list .latest{margin:20px 0;border: 1px solid #ccc;overflow: hidden;}
+			#product-list .latest h3{width: 100%;background: #F5F5F5;height: 40px;line-height: 40px;text-indent: 20px;}
+			#product-list .latest dl dt{width: 100%;height: 100px;overflow: hidden;}
+			#product-list .latest dl dd{text-align: center;height: 30px;line-height: 30px;}
+			#product-list .pro-r{width: 80%;margin-left: 3%;}
+			#product-list .pro-r .pro-bar{width: 100%;background-color:#eee;overflow: hidden;height:40px;line-height: 40px;}
+			#product-list .pro-r .pro-bar li{float: left;padding: 0 5px;}
+			#sort{width: 1200px;overflow: hidden;margin: 20px auto;} 
+			#sort .sort-top{height: 50px;line-height: 50px;}
+			#sort .sort-top a{font-size: 20px;}
+			#sort h3{height: 40px;line-height:40px;background-color: #ccc;font-size: 20px;text-indent: 10px;width: 100%;}
+			
+			#sort .sort-l{width: 18%;overflow: hidden;border: 1px solid #ccc;}
+			#sort .sort-l .sort-box1{padding:10px  20px ;}
+			#sort .sort-l .sort-box2{padding:10px  20px ;}
+			#sort .sort-l .sort-box3{padding:10px  20px ;}
+			#sort .sort-l .sort-box3 li{height: 24px;line-height: 24px;}
+			#sort .sort-l i{margin-right: 10px;display: inline-block;}
+			#sort .sort-r{border:1px solid #ccc;width: 80%;}
+			#sort .sort-r h3 span{color:red}
+			#sort .sort-r li{height: 33px;line-height: 33px;text-indent: 20px;width:100%;border-top:1px solid #ccc;}
+			#sort .sort-r li a{display: block;float: left;color:cornflowerblue}
+			#sort .sort-r li a:first-child{color:black;font-size: 14px;}
+			#sort .sort-r li:first-child span{cursor:pointer;float: right;text-align: center;margin-right: 20px;}
+			#sort .sort-r li:first-child span i{text-indent: 0;}
+			#sort .sort-r li:first-child span a{clear: both;}
+		</style>
+	</head>
+	<body>
+		<div id="wrap-header"></div>
+		<div id="top_banner">
+			<a href="#"><img src="../img/top/topbanner.jpg"/></a>
+		</div>
+		<div id="search"></div>
+		<div id="nav"></div>
+		<div id="sort">
+			<div class="sort-top">
+				<a href="#">手机数码</a>><a href="#">手机</a>
+			</div>
+			<div class="sort-l fl">
+				<h3>分类筛选</h3>
+				<div class="sort-box1">
+					<i class="fa fa-minus"></i><a href="#">手机数码</a>
+					<div class="sort-box2">
+						<i class="fa fa-minus"></i><a href="#">手机</a>
+						<div class="sort-box3">
+							<ul>
+								<li><a href="#">华为</a></li>
+								<li><a href="#">小米</a></li>
+								<li><a href="#">酷派</a></li>
+								<li><a href="#">魅族</a></li>
+								<li><a href="#">iPhone</a></li>
+								<li><a href="#">中兴</a></li>
+							</ul>
+						</div>
+					</div>	
+				</div>
+			</div>
+			<div class="sort-r fr">
+				<h3><span>手机/数码</span>-商品筛选</h3>
+				<div>
+					<ul>
+						<li>
+							<a href="#">内存：</a><a href="#">1G</a><a href="#">2G</a><a href="#">3G</a><a href="#">4G</a><a href="#">5G</a><a href="#">6G</a> <span><i class="fa fa-angle-down"></i>更多</span>
+						</li>
+						
+						<li>
+							<a href="#">价格：</a><a href="#">0~500</a><a href="#">500~1000</a><a href="#">1000~1500</a><a href="#">1500~2000</a><a href="#">200~2500</a><a href="#">2500~3000</a>
+						</li>
+						
+						<li>
+							<a href="#">尺寸：</a><a href="#">3.5寸以下</a><a href="#">3.5~4寸</a><a href="#">4~5寸</a><a href="#">5~6寸</a><a href="#">7寸</a><a href="#">7寸以上</a>
+						</li>
+						<li>
+							<a href="#">内存：</a><a href="#">1G</a><a href="#">2G</a><a href="#">3G</a><a href="#">4G</a><a href="#">5G</a><a href="#">6G</a>
+						</li>
+						<li>
+							<a href="#">价格：</a><a href="#">0~500</a><a href="#">500~1000</a><a href="#">1000~1500</a><a href="#">1500~2000</a><a href="#">200~2500</a><a href="#">2500~3000</a>
+						</li>
+						
+						<li>
+							<a href="#">尺寸：</a><a href="#">3.5寸以下</a><a href="#">3.5~4寸</a><a href="#">4~5寸</a><a href="#">5~6寸</a><a href="#">7寸</a><a href="#">7寸以上</a>
+						</li>
+						<li>
+							<a href="#">尺寸：</a><a href="#">3.5寸以下</a><a href="#">3.5~4寸</a><a href="#">4~5寸</a><a href="#">5~6寸</a><a href="#">7寸</a><a href="#">7寸以上</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="product-list">
+			<div class="pro-left">
+				<div><a href="#"><img src="../img/product/iphone7.jpg"/></a></div>
+				<div class="latest">
+					<h3>最近浏览</h3>
+					<dl>
+						<dt><img src="../img/product/pro3.jpg"/></dt>
+						<dd>123456hh</dd>
+					</dl>
+				</div>
+			</div>
+			
+			<!--//产品-->
+			<div class="fl pro-r">
+				<div class="pro-bar">
+					
+					<ul>
+						<li><span>排序方式:</span></li>
+						<li><a href="#">默认</a></li>
+						<li><a href="#" >销量</a><i class="fa fa-arrow-down"></i></li>
+						<li><a href="#">价格</a><i class="fa fa-arrow-down"></i></li>
+						<li><a href="#">人气</a><i class="fa fa-arrow-down"></i></li>
+					</ul>
+				</div>
+				<div class="pro">
+					
+				</div>
+				
+				<!--//翻页按钮-->
+				<div class="pro-btn">
+					
+				</div>
+			</div>
+		</div>
+		
+		
+		<div id="wrap_service"></div>
+		<div id="foot-link"></div>
+		<div id="footer"></div>
+		
+		
+		<script type="text/javascript">
+			
+			$(function(){
+				$('#wrap-header').load('sub/header.html');
+				$('#search').load('sub/search.html');
+				$('#nav').load("sub/nav.html");
+				$("#foot-link").load("sub/foot-link.html");
+				$("#footer").load("sub/footer.html");
+				
+				var page = function(_pageindex, _isgenerate){
+						$.get('../data/pro-list.txt', {'_': Math.random(), page: _pageindex}, function(response){
+							var obj = JSON.parse(response);
+							var pageCount = obj.result.length % obj.pageSize > 0 ? parseInt(obj.totalCount / obj.pageSize) + 1 :  parseInt(obj.totalCount / obj.pageSize)
+							var pageFlag = '';
+							var prolist = '';
+							if(!_isgenerate){
+								return false;
+							}
+							
+							//页码
+							pageFlag='<span class="pre">上一页</span><div class="btn-group">';
+							for(var i = 1; i <= pageCount; i++){
+								pageFlag += ('<span class="btns">' + i + '</span>');
+								
+							}
+							pageFlag+='</div><span class="next">下一页</span>'
+							$(pageFlag).appendTo('.pro-btn');
+							
+							 var pageindex=1;//页码
+							 btnBack($(".btns"),pageindex)
+							
+							 
+							 
+							//list初始化，显示第一页
+							showProduct(obj,pageindex);
+							
+						//点击商品跳转到指定url
+						$('#product-list .pro').find('img').click(function(){
+							
+							console.log($(this).attr('value'));
+							var x=$(this).attr('value')
+							location.href="details.html?id="+x;
+						})
+							
+							
+							
+							
+							$('.goods-add').click(function(){
+								var price=parseFloat(($(this).prev().html().replace("¥","")));    
+								var title=$(this).prev().prev().text();
+								var src=$(this).parent().prev().find('img').prop("src");
+							//	num++;
+								//console.log(src)
+								
+								//设置cookie
+								savegood(title,price,src)
+								//console.log(document.cookie)
+								//cookieDeal(c_namearr,c_pricearr,c_srcarr,c_numarr);
+								//console.log(c_numarr)
+							})
+							
+							var NAMES="NAMES";
+							var PRICES="PRICES";
+							var SRCS="SRCS";
+							var NUMS="NUMS";
+	                		//获取cook
+							var c_namestr=getCookie("NAMES");
+							var c_pricestr=getCookie("PRICES");
+	                		var c_srcstr=getCookie("SRCS");
+	                		var c_numstr=getCookie("NUMS");
+	                		
+	                		var c_namearr=[];
+							var c_pricearr=[];
+	                		var c_srcarr=[];
+	                		var c_numarr=[];
+	                		
+	                		if(c_namestr){
+							  c_namearr=c_namestr.split("&");
+							  c_pricearr=c_pricestr.split("&");
+							  c_srcarr=c_srcstr.split("&");
+							   c_numarr=c_numstr.split("&");
+							}
+	                		
+	                		function savegood(name,price,src){
+									console.log("namearr"+c_namearr);
+									c_namearr.push(name);
+									c_pricearr.push(price);
+									c_srcarr.push(src);
+								//	c_numarr.push(num);
+									//数组转成字符串
+								//	console.log("numarr:"+c_numarr);
+									
+									var tem_name=c_namearr.join("&");
+									var tem_price=c_pricearr.join("&");
+									var tem_src=c_srcarr.join("&");
+								//	var tem_num=c_numarr.join("$")
+									//console.log("tem_name:"+tem_name);
+									removeCookie(NAMES);
+									removeCookie(PRICES);
+									removeCookie(SRCS);
+								//	removeCookie(NUMS);
+									
+									var d=new Date();
+									d.setDate(d.getDate()+7);
+									
+									setCookie(NAMES,tem_name,d);
+									console.log("tem_name:"+tem_name);
+									setCookie(PRICES,tem_price,d);
+									setCookie(SRCS,tem_src,d);
+								//	setCookie(NUMS,tem_num,d);
+						
+						}//savegood
+	                	
+	                	
+						//上一页
+						$('.pre').click(function(){
+								pageindex--;
+								 btnBack($(".btns"),pageindex)
+								if(pageindex<=1){
+									pageindex=1;
+								}
+							//	console.log(pageindex);
+								showProduct(obj,pageindex);
+							})
+						//console.log("pageCount"+pageCount)
+						
+						//下一页
+						$('.next').click(function(){
+								pageindex++;
+								 btnBack($(".btns"),pageindex)
+								if(pageindex>=pageCount){
+									pageindex=pageCount;
+								}
+								console.log(pageindex)
+								showProduct(obj,pageindex)
+								
+							})
+					
+						
+						$('.btns').click(function(){
+							//按钮颜色
+							 $(this).css("background-color","red");
+						 	$(this).siblings().css("background-color","#eee");
+							
+							console.log("btns");							
+							
+							//页码等于按钮内容
+							pageindex=parseInt($(this).html());
+							showProduct(obj,pageindex)
+							/*$(this).css("background","#9370DB")
+							$(this).siblings().css("background","#ccc")*/
+							
+						})
+							
+							
+				})//$.get
+			}//page
+				
+				page(1, true);
+				
+			//显示数据函数
+			function showProduct(obj,pageindex){
+				//清空页面和prolist中的内容
+					
+					$('.pro').html("");
+					prolist="";
+				//	console.log("pageindex"+pageindex)
+					for(var i=(pageindex-1)*obj.pageSize;i<=obj.pageSize*pageindex-1;i++){
+						if(i==-1){
+							i=0;
+						}
+						//最后商品数量不够
+						if(i>=obj.result.length){
+							break;
+						}
+					//	console.log(i)
+						/*prolist+=("<dl><dt><a href='details.html'><img src="
+								+obj.result[i].src+" /></a></dt><dd><p class='tit'><a href='#'>"
+								+obj.result[i].title+"</a></p><p class='price'>¥"
+								+obj.result[i].price+"</p><input type='button' value='加入购物车' class='goods-add'/></dd></dl>")
+					*/
+					
+					prolist+=("<dl><dt><img src="
+									+obj.result[i].src+" value="+obj.result[i].id+" /></dt><dd><p class='tit'>"
+									+obj.result[i].title+"</p><p class='price'>¥"
+									+obj.result[i].price+"</p><input type='button' value='加入购物车' class='goods-add'/></dd></dl>")
+							
+							
+					}
+						$(prolist).appendTo('.pro');
+				
+				}
+	
+			
+			 //btns背景色
+			 function btnBack(obj,pageindex){
+			 	//console.log(pageindex);
+			 	if(pageindex<=1){
+			 		pageindex=1;
+			 	}
+			 	
+			 	 obj.eq(pageindex-1).css({"background-color":"red"});
+			 	 obj.eq(pageindex-1).siblings().css("background-color","#eee");
+			 }
+					
+			
+			
+			//console.log($('#nav .nav-l'))
+			$('#nav .nav-l').find("h3").mouseover(function(){
+				con
+				$(".menu").show()
+			}).mouseout(function(){
+				$(".menu").hide()
+			})
+			
+			
+			
+			
+			
+		})
+			
+		</script>
+	</body>
+</html>

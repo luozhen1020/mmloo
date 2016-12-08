@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../lib/jquery-2.1.1.min.js" ></script>
+		<script type="text/javascript" src="../js/base.js" ></script><!--cookie-->
+		
+		
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css" />
+		<style type="text/css">
+			#login-logo{width: 1000px;margin: 30px auto;overflow: hidden;}
+			#login-content{width: 1000px;margin: 30px auto;overflow: hidden; box-shadow: 0 0 30px rgba(181,181,181,0.5);}
+			.login-r{width: 300px;height: 100%;border:1px solid #ccc;background-color: #eee;padding:10px 20px}
+			.login-r h3{height: 40px;line-height: 40px;font-weight: bold;font-size: 24px;padding-bottom: 10px;}
+			.login-r .login-username input,.login-r .login-password input{outline: none;height: 40px;width:250px;border:0;float:right;text-indent: 10px;font-size: 16px;}
+			.login-r form div{margin-top: 15px;border:1px solid #ccc;overflow: hidden;}
+			
+			.login-r form div label i{color: white;font-size: 30px;text-indent: 10px;padding-top: 5px;}
+			.login-r .login-sub{border:none}
+			.login-r .login-sub .login-btn{width: 98px;height: 34px;background: orange;color: white;line-height: 34px;text-align: center;margin:0 10px 0 50px;border: 0;border-radius: 3px;}
+			.login-r .login-sub a{color:blue;font-size: 14px;}
+			.login-r .login-forget{border:0;padding-left:25%}
+			.login-r .login-forget .register-btn{width:40px;height: 30px;}
+			.login-r .login-bottom{padding-left: 50px;border-top:1px dashed #ccc}
+			.login-r .login-bottom p{height: 40px;line-height: 40px;}
+			.login-r .login-bottom input{width: 78px;height: 28px;border: 0;border-radius: 3px;outline: none;}
+			.login-r .login-bottom .partner1{background: url(../img/content/login.png) no-repeat -88px 0;}
+			.login-r .login-bottom .partner2{background: url(../img/content/login.png) no-repeat -166px 0;}
+			.login-r .login-bottom .partner3{background: url(../img/content/login.png) no-repeat 0 -200px;}
+		</style>
+	</head>
+	<body>
+		<div id="top_banner">
+			<a href="#"><img src="../img/top/topbanner.jpg"/></a>
+		</div>
+		
+		<div id="login-logo">
+			<div class="logo fl "><a href="index.html"><img src="../img/top/logo.png" /></a></div>
+		</div>
+		
+		<div id="login-content">
+			<div class="loogin-l fl">
+				<img src="../img/content/login-pic.jpg" />
+			</div>
+			
+			<div class="login-r fr">
+				<h3>用户登录</h3>
+				<form>
+					<div class="login-username">
+						<label><i class="fa fa-user"></i></label>
+						<input type="text" placeholder="手机号/会员名/邮箱"  class="tex"/>
+					</div>
+					
+					<div class="login-password">
+						<label><i class="fa fa-lock"></i></label>
+						<input type="text" placeholder="密码" class="pass" />
+					</div>
+					
+					<div class="login-sub">
+						<input type="button" value="登录" class="login-btn" />
+						<a href="#">忘记密码?</a>
+						
+					</div>
+					
+					<div class="login-forget">
+						<span>还不是本站会员？立即</span>
+						<a href="register.html"><input type="button" value="注册" class="register-btn" /></a>
+					</div>
+				</form>
+				
+				<div class="login-bottom">
+					<p>你可以用合作伙伴帐号登录</p>
+					<input type="button" class="partner1"/>
+					<input type="button" class="partner2"/>
+					<input type="button" class="partner3"/>
+				</div>
+			</div>
+		</div>
+		
+		<div id="footer"></div>
+		
+		<script type="text/javascript">
+			$(function(){
+				$('#footer').load("sub/footer.html")
+				
+				$('.partner1').mouseover(function(){
+					console.log("over")
+					$(this).css("background","url(../img/content/login.png) no-repeat -88px -28px")
+				}).mouseout(function(){
+					$(this).css("background","url(../img/content/login.png) no-repeat -88px 0")
+				})
+				
+				$('.partner2').mouseover(function(){
+					console.log("over")
+					$(this).css("background","url(../img/content/login.png) no-repeat -166px -28px")
+				}).mouseout(function(){
+					$(this).css("background","url(../img/content/login.png) no-repeat -166px 0")
+				})
+				
+				$('.partner3').mouseover(function(){
+					console.log("over")
+					$(this).css("background","url(../img/content/login.png) no-repeat 0 -228px")
+				}).mouseout(function(){
+					$(this).css("background","url(../img/content/login.png) no-repeat 0 -200px")
+				})
+				
+				
+				console.log(document.cookie);
+					//判断是否保存了账号和密码
+	                var oldUsername = getCookie("username");
+	                var oldPassword = getCookie("userpass");
+					//console.log(document.cookie);
+					//console.log(oldUsername.length)
+	                if (oldUsername.length) {
+	                    $('.tex').val(oldUsername);
+	                    $('.pass').val(oldPassword);
+	                } 
+	                
+	                
+	                
+	                //点击登录
+	                $('.login-btn').click(function(){
+	                	$.ajax({
+						type:"get",
+						url:"../data/response.json",
+						async:true,
+						
+						success:function(x){
+							console.log(x)
+							
+							var flag=0;
+							for(var i=0;i<x.user.length;i++){
+								console.log('i:'+i)
+								console.log('x.user[i].phone:'+x.user[i].phone)
+								if(x.user[i].phone==$('.tex').val()&&x.user[i].password==$('.pass').val()){
+								//if($('.check-box')[0].checked){
+										flag=1;
+										var username=$('.tex').val();
+										var userpass=$('.pass').val();
+										console.log(username+","+userpass);
+										var date1=new Date();
+										date1.setDate(date1.getDate()+10);
+										setCookie("username", username, date1);
+			                      	    setCookie("userpass", userpass, date1);
+			                       	 	console.log("提交之后："+document.cookie);
+								//}
+								window.location.href="index.html"
+							}
+								
+							}
+							//验证失败
+							if(!flag){
+								alert("验证失败，请正确输入")
+								$('.tex').val("");
+	                   			$('.pass').val("");
+							
+							}
+							
+						},
+					});
+	                	//console.log('00')
+	                	//window.location.href="index.html"
+	                })
+			})
+		</script>
+		
+	</body>
+</html>
